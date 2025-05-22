@@ -1,0 +1,78 @@
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import banner from "../../assets/images/banner1.png";
+import { fonts } from "../../theme/theme";
+
+const Banner = () => {
+  const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  return (
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        backgroundImage: `url(${banner})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        position: "relative",
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "20%",
+            left: smScreen ? "10%" : "2%",
+          }}
+        >
+          <Typography
+            variant="h3"
+            sx={{
+              color: "#fff",
+              fontSize: "28px",
+              fontFamily: fonts.styreneLight,
+              maxWidth: smScreen ? "75%" : "50%",
+              lineHeight: "32px",
+              mb: 2,
+            }}
+          >
+            Elevate Your Style Timeless Fashion, Sustainable Choices
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#F8F9FA",
+              color: "#000",
+              fontFamily: !smScreen ? fonts.styreneRegular : fonts.styreneLight,
+              fontSize: "15px",
+              width: smScreen ? "50%" : null,
+              mt: 2,
+              px: 2,
+              py: 1,
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#F8F9FA",
+                color: "#000",
+                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+              },
+            }}
+          >
+            Shop Now
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default Banner;
