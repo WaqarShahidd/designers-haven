@@ -162,3 +162,30 @@ export const productDetailsData = [
   { image: require("../images/detail3.jpg") },
   { image: require("../images/detail4.jpg") },
 ];
+
+export const colorsData = [
+  { color: "#C4C4B0", name: "Beige" },
+  { color: "#000000", name: "Black" },
+  { color: "#9fc5e8", name: "Blue" },
+  { color: "#FF5733", name: "Red" },
+  { color: "#C70039", name: "Pink" },
+  { color: "#581845", name: "Purple" },
+];
+
+export const sizesData = [
+  { size: "XS" },
+  { size: "S" },
+  { size: "M" },
+  { size: "L" },
+  { size: "XL" },
+  { size: "XXL" },
+];
+
+export const materialData = [
+  { material: "Cotton (19)" },
+  { material: "Polyester (12)" },
+  { material: "Wool (8)" },
+  { material: "Silk (5)" },
+  { material: "Leather (3)" },
+  { material: "Linen (2)" },
+];

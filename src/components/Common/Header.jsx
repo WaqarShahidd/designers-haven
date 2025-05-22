@@ -46,9 +46,9 @@ const Header = () => {
       sx={{
         position: isSticky ? "fixed" : "relative",
         top: 0,
-        width: isSticky ? (smScreen ? "90%" : "95%") : "auto",
+        width: isSticky ? (smScreen ? "90%" : "97.5%") : "auto",
         backgroundColor: "#fff",
-        zIndex: 1500,
+        zIndex: 5,
         animation: isSticky ? `${slideDown} 0.4s ease-in-out` : "none",
         transition: "all 0.3s ease-in-out",
         p: 3,
@@ -57,6 +57,7 @@ const Header = () => {
         justifyContent: "space-between",
         alignItems: "center",
         boxShadow: isSticky ? 3 : "none",
+        borderBottom: "1px solid #DDDDDD",
       }}
     >
       <Stack
@@ -65,11 +66,20 @@ const Header = () => {
         gap={4}
         width={mdScreen ? "100%" : "50%"}
       >
-        <img
-          src={require("../../assets/icons/logo.png")}
-          style={{ width: "80px", height: "20px" }}
-          alt="logo"
-        />
+        <Typography
+          onClick={() => navigate("/")}
+          sx={{
+            fontSize: "24px",
+            fontWeight: 700,
+            color: "#000",
+            fontFamily: fonts.styreneBlack,
+            lineHeight: "0",
+            letterSpacing: "0.5px",
+            cursor: "pointer",
+          }}
+        >
+          DH.
+        </Typography>
         {!smScreen && (
           <Box
             sx={{
@@ -87,7 +97,7 @@ const Header = () => {
                 sx={{
                   color: "#000",
                   fontWeight: 400,
-                  fontSize: "16px",
+                  fontSize: "14px",
                   fontFamily: fonts.styreneLight,
                   letterSpacing: "0.5px",
                   cursor: "pointer",

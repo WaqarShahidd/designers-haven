@@ -1,8 +1,10 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import banner from "../../assets/images/banner1.png";
 import { fonts } from "../../theme/theme";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <Box
@@ -49,6 +51,7 @@ const Banner = () => {
             Elevate Your Style Timeless Fashion, Sustainable Choices
           </Typography>
           <Button
+            onClick={() => navigate("/products")}
             variant="contained"
             sx={{
               backgroundColor: "#F8F9FA",

@@ -1,10 +1,11 @@
-import { Box, Grid, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Grid, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Layout from "../../layout/Layout";
 import { fonts } from "../../theme/theme";
 import { ArrowDropDown } from "@mui/icons-material";
 import { wearNowData } from "../../assets/data/dummyData";
 import ProductCard from "../../components/Products/ProductCard";
+import FilterDrawer from "../../components/Products/FilterDrawer";
 
 const Products = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -16,6 +17,9 @@ const Products = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [filter, setFilter] = useState(false);
+
   return (
     <Layout>
       <Box
@@ -38,25 +42,51 @@ const Products = () => {
           Shop
         </Typography>
 
-        <Typography
-          sx={{
-            width: "15%",
-            fontFamily: fonts.styreneMedium,
-            fontSize: "14px",
-            color: "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            "&:hover": {
-              textDecoration: "underline",
-            },
-          }}
-          onClick={handleClick}
+        <Stack
+          direction={"row"}
+          spacing={2}
+          alignItems={"center"}
+          width={"30%"}
+          justifyContent={"flex-end"}
         >
-          Sort
-          <ArrowDropDown sx={{ color: "#000" }} />
-        </Typography>
+          <Typography
+            sx={{
+              width: "15%",
+              fontFamily: fonts.styreneMedium,
+              fontSize: "14px",
+              color: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+            onClick={handleClick}
+          >
+            Sort
+            <ArrowDropDown sx={{ color: "#000" }} />
+          </Typography>
+          <Typography
+            sx={{
+              width: "15%",
+              fontFamily: fonts.styreneMedium,
+              fontSize: "14px",
+              color: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+            onClick={() => setFilter(!filter)}
+          >
+            Filter
+          </Typography>
+        </Stack>
         <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
           <MenuItem
             onClick={() => handleClose()}
@@ -110,6 +140,8 @@ const Products = () => {
           ))}
         </Grid>
       </Box>
+
+      <FilterDrawer open={filter} toggleDrawer={() => setFilter(!filter)} />
     </Layout>
   );
 };
