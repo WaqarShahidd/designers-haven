@@ -1,33 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Box,
   Typography,
-  Button,
   Stack,
   IconButton,
   useMediaQuery,
 } from "@mui/material";
 import { keyframes } from "@emotion/react";
 import { fonts } from "../../theme/theme";
-import { AccountCircle, SearchOutlined } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Close,
+  MenuOutlined,
+  SearchOutlined,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { nav } from "../../assets/data/dummyData";
+import MobileDrawer from "./MobileDrawer";
 
 const slideDown = keyframes`
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
 `;
 
-const nav = [
-  { id: 1, name: "Home", link: "/" },
-  { id: 2, name: "About", link: "/about" },
-  { id: 3, name: "Shop", link: "/products" },
-];
-
 const Header = () => {
   const navigate = useNavigate();
 
+  const [open, setOpen] = useState(false);
+  const toggleSidebar = () => {
+    setOpen(!open);
+  };
+
   const [isSticky, setIsSticky] = useState(false);
   const ref = useRef(null);
+
+  const [showSearch, setShowSearch] = useState(false);
 
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const mdScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
@@ -66,6 +73,9 @@ const Header = () => {
         gap={4}
         width={mdScreen ? "100%" : "50%"}
       >
+        <IconButton onClick={toggleSidebar}>
+          <MenuOutlined />
+        </IconButton>
         <Typography
           onClick={() => navigate("/")}
           sx={{
@@ -80,7 +90,9 @@ const Header = () => {
         >
           DH.
         </Typography>
-        {!smScreen && (
+        {smScreen ? (
+          <MobileDrawer open={open} toggleSidebar={toggleSidebar} />
+        ) : (
           <Box
             sx={{
               display: "flex",
@@ -114,14 +126,86 @@ const Header = () => {
           </Box>
         )}
       </Stack>
+
       <Stack direction={"row"} alignItems={"center"} gap={2}>
-        <IconButton>
+        <IconButton onClick={() => setShowSearch(true)}>
           <SearchOutlined sx={{ color: "#000" }} />
         </IconButton>
         <IconButton>
           <AccountCircle sx={{ color: "#000" }} />
         </IconButton>
       </Stack>
+
+      {showSearch && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "20%",
+            backdropFilter: "blur(10px)",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
+          }}
+          onClick={() => setShowSearch(false)}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              px: 4,
+              py: 2,
+              borderBottom: "1px solid #DDD",
+              backgroundColor: "#fff",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Typography
+              sx={{
+                fontSize: "24px",
+                fontWeight: 700,
+                fontFamily: fonts.styreneBlack,
+                color: "#000",
+              }}
+            >
+              DH.
+            </Typography>
+            <IconButton onClick={() => setShowSearch(false)}>
+              <Close sx={{ color: "#000" }} />
+            </IconButton>
+          </Box>
+
+          <Box
+            sx={{
+              px: 4,
+              py: 3,
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <SearchOutlined sx={{ color: "#000" }} />
+            <input
+              type="text"
+              placeholder="Search..."
+              autoFocus
+              style={{
+                border: "none",
+                outline: "none",
+                background: "transparent",
+                fontSize: "18px",
+                fontFamily: fonts.styreneRegular,
+                width: "100%",
+              }}
+            />
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };

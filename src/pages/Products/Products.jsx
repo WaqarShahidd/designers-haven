@@ -1,4 +1,12 @@
-import { Box, Grid, Menu, MenuItem, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useState } from "react";
 import Layout from "../../layout/Layout";
 import { fonts } from "../../theme/theme";
@@ -19,6 +27,8 @@ const Products = () => {
   };
 
   const [filter, setFilter] = useState(false);
+
+  const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <Layout>
@@ -46,12 +56,12 @@ const Products = () => {
           direction={"row"}
           spacing={2}
           alignItems={"center"}
-          width={"30%"}
+          width={smScreen ? "50%" : "30%"}
           justifyContent={"flex-end"}
         >
           <Typography
             sx={{
-              width: "15%",
+              width: smScreen ? "30%" : "15%",
               fontFamily: fonts.styreneMedium,
               fontSize: "14px",
               color: "#000",
@@ -70,7 +80,7 @@ const Products = () => {
           </Typography>
           <Typography
             sx={{
-              width: "15%",
+              width: smScreen ? "30%" : "15%",
               fontFamily: fonts.styreneMedium,
               fontSize: "14px",
               color: "#000",

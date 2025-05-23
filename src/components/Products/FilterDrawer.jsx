@@ -1,4 +1,10 @@
-import { Box, Drawer, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useState } from "react";
 import { fonts } from "../../theme/theme";
 import { Close } from "@mui/icons-material";
@@ -12,25 +18,20 @@ import CustomBtn from "../Common/CustomBtn";
 const FilterDrawer = ({ open, toggleDrawer }) => {
   const [selectedColor, setSelectedColor] = useState(colorsData?.[0]);
 
-  const selectedColorName = colorsData?.find(
-    (c) => c.color === selectedColor
-  )?.name;
+  const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer}>
       <Box
         sx={{
-          width: 400,
-          height: "100vh",
+          width: smScreen ? 250 : 400,
+          height: smScreen ? "86vh" : "100vh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
         role="presentation"
-        onClick={toggleDrawer}
-        onKeyDown={toggleDrawer}
       >
+        {/* Header */}
         <Box
           sx={{
             display: "flex",
@@ -40,7 +41,7 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
             borderBottom: "1px solid #DDDDDD",
           }}
         >
-          <IconButton></IconButton>
+          <Box />
           <Typography
             sx={{
               color: "#000",
@@ -51,12 +52,21 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
             Filters
           </Typography>
 
-          <IconButton>
-            <Close sx={{ color: "#000" }} onClick={toggleDrawer} />
+          <IconButton onClick={toggleDrawer}>
+            <Close sx={{ color: "#000" }} />
           </IconButton>
         </Box>
 
-        <Box sx={{ p: 4 }}>
+        {/* Scrollable Content */}
+        <Box
+          sx={{
+            flex: 1,
+            overflowY: "auto",
+            px: 2,
+            py: 4,
+          }}
+        >
+          {/* Color Section */}
           <Typography
             sx={{
               color: "#000",
@@ -76,6 +86,7 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
           >
             {colorsData.map((clr) => (
               <Box
+                key={clr.color}
                 sx={{
                   width: 30,
                   height: 30,
@@ -104,6 +115,7 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
             ))}
           </Box>
 
+          {/* Material Section */}
           <Typography
             sx={{
               color: "#000",
@@ -117,6 +129,7 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
           </Typography>
           {materialData.map((material) => (
             <Typography
+              key={material.material}
               sx={{
                 color: "#565656",
                 fontSize: "14px",
@@ -132,6 +145,7 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
             </Typography>
           ))}
 
+          {/* Sizes Section */}
           <Typography
             sx={{
               color: "#000",
@@ -145,6 +159,7 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
           </Typography>
           {sizesData.map((size) => (
             <Typography
+              key={size.size}
               sx={{
                 color: "#565656",
                 fontSize: "14px",
@@ -161,13 +176,18 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
           ))}
         </Box>
 
+        {/* Footer */}
         <Box
           sx={{
-            p: 2,
+            px: 2,
             borderTop: "1px solid #DDDDDD",
           }}
         >
-          <CustomBtn onClick={toggleDrawer} text={"Apply Filters"} />
+          <CustomBtn
+            onClick={toggleDrawer}
+            text={"Apply Filters"}
+            width="100%"
+          />
         </Box>
       </Box>
     </Drawer>

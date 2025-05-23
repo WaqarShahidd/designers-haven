@@ -1,3 +1,9 @@
+export const nav = [
+  { id: 1, name: "Home", link: "/" },
+  { id: 2, name: "About", link: "/about" },
+  { id: 3, name: "Shop", link: "/products" },
+];
+
 export const bestSellerData = [
   {
     id: 1,
