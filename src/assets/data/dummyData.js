@@ -1,6 +1,8 @@
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+
 export const nav = [
   { id: 1, name: "Home", link: "/" },
-  { id: 2, name: "About", link: "/about" },
+  // { id: 2, name: "About", link: "/about" },
   { id: 3, name: "Shop", link: "/products" },
 ];
 
@@ -25,9 +27,11 @@ export const bestSellerData = [
 export const wearNowData = [
   {
     id: 1,
-    name: "Classic Easy Zipper Tote",
-    price: "298",
-    image: require("../images/product1.png"),
+    name: "Impassioned Pants",
+    price: "90",
+    orderType: "Custom-Made",
+    image:
+      "https://drive.usercontent.google.com/download?id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U&export=view&authuser=0",
     colors: [
       {
         name: "Black",
@@ -47,7 +51,8 @@ export const wearNowData = [
     id: 2,
     name: "Concertina Phone Bag",
     price: "248",
-    image: require("../images/product2.png"),
+    image:
+      "https://drive.usercontent.google.com/download?id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U&export=view&authuser=0",
     colors: [
       {
         name: "Black",
@@ -67,7 +72,8 @@ export const wearNowData = [
     id: 3,
     name: "Wool Cashmere Sweater Coat",
     price: "398",
-    image: require("../images/product3.png"),
+    image:
+      "https://drive.usercontent.google.com/download?id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U&export=view&authuser=0",
     colors: [
       {
         name: "Black",
@@ -87,7 +93,8 @@ export const wearNowData = [
     id: 4,
     name: "Single-Origin Cashmere Beanie",
     price: "98",
-    image: require("../images/product4.png"),
+    image:
+      "https://drive.usercontent.google.com/download?id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U&export=view&authuser=0",
     colors: [
       {
         name: "Black",
@@ -107,7 +114,8 @@ export const wearNowData = [
     id: 5,
     name: "Classic Easy Zipper Tote",
     price: "248",
-    image: require("../images/product5.png"),
+    image:
+      "https://drive.usercontent.google.com/download?id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U&export=view&authuser=0",
     colors: [
       {
         name: "Black",
@@ -142,24 +150,49 @@ export const footerData = [
   {
     id: 1,
     title: "Contact Us",
-    links: ["+1 (844) 326-6000", "Email Us", "Mon-Fri 9am-3pm PT"],
-  },
-  {
-    id: 2,
-    title: "CUSTOMERS",
-    links: ["Start a Return", "Return Policy", "Shipping Policy", "FAQs"],
-  },
-  {
-    id: 3,
-    title: "Company",
     links: [
-      "About Us",
-      "Careers",
-      "Privacy Policy",
-      "Terms of Service",
-      "Accessibility Statement",
+      {
+        name: "whatsApp",
+        linkUrl:
+          "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products",
+        icon: (
+          <WhatsAppIcon
+            sx={{
+              fontSize: 16,
+            }}
+          />
+        ),
+      },
+      {
+        name: "Instagram",
+        linkUrl:
+          "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products",
+        icon: (
+          <WhatsAppIcon
+            sx={{
+              fontSize: 16,
+            }}
+          />
+        ),
+      },
     ],
   },
+  // {
+  //   id: 2,
+  //   title: "CUSTOMERS",
+  //   links: ["Start a Return", "Return Policy", "Shipping Policy", "FAQs"],
+  // },
+  // {
+  //   id: 3,
+  //   title: "Company",
+  //   links: [
+  //     "About Us",
+  //     "Careers",
+  //     "Privacy Policy",
+  //     "Terms of Service",
+  //     "Accessibility Statement",
+  //   ],
+  // },
 ];
 
 export const productDetailsData = [

@@ -45,11 +45,34 @@ const Banner = () => {
               fontFamily: fonts.styreneLight,
               maxWidth: smScreen ? "75%" : "50%",
               lineHeight: "32px",
+              fontWeight: 600,
               mb: 2,
             }}
           >
-            Elevate Your Style Timeless Fashion, Sustainable Choices
+            Designer’s Haven
           </Typography>
+          <Typography
+            variant="h3"
+            sx={{
+              color: "#fff",
+              fontSize: "28px",
+              fontFamily: fonts.styreneLight,
+              maxWidth: smScreen ? "75%" : "50%",
+              lineHeight: "32px",
+              mb: 2,
+            }}
+          >
+            Connecting Zimbabwean Fashion to the World. Designer’s Haven is a
+            curated fashion tech platform created to support and showcase
+            Zimbabwean fashion designers. Our mission is to connect local talent
+            with a wider audience across Africa and beyond.
+          </Typography>
+          <img
+            src="https://drive.google.com/uc?export=view&id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U"
+            alt="Image"
+            width="300"
+          />
+
           <Button
             onClick={() => navigate("/products")}
             variant="contained"

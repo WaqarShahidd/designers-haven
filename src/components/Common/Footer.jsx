@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import { footerData } from "../../assets/data/dummyData";
 import { fonts } from "../../theme/theme";
-
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 const Footer = () => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
@@ -31,7 +31,9 @@ const Footer = () => {
           <Grid
             size={{ xs: 12, sm: 6, md: 4 }}
             key={item.id}
-            sx={{ mb: smScreen ? 2 : 0 }}
+            sx={{
+              mb: smScreen ? 2 : 0,
+            }}
           >
             <Typography
               sx={{
@@ -46,28 +48,45 @@ const Footer = () => {
               {item.title}
             </Typography>
 
-            {item.links.map((link, index) => (
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+              }}
+            >
               <Typography
+                component="a"
+                href={
+                  "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   color: "#000",
-                  fontSize: "12px",
+                  fontSize: "16px",
                   lineHeight: "20px",
-                  fontFamily: fonts.styreneMedium,
-                  mb: 1,
+                  fontFamily: "Sora",
+
+                  mr: 1,
                   cursor: "pointer",
                   "&:hover": {
                     textDecoration: "underline",
                   },
                 }}
               >
-                {link}
+                +263 78 576 3984
               </Typography>
-            ))}
+              <WhatsAppIcon
+                sx={{
+                  fontSize: 16,
+                }}
+              />
+            </Box>
           </Grid>
         ))}
       </Grid>
 
-      <Box
+      {/* <Box
         sx={{
           width: smScreen ? "100%" : "40%",
           display: "flex",
@@ -195,7 +214,7 @@ const Footer = () => {
         >
           Subscribe
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
