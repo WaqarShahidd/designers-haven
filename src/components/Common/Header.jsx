@@ -30,12 +30,13 @@ const Header = () => {
   const [search, setSearch] = useState("");
 
   const [open, setOpen] = useState(false);
-  const [banner, setBanner] = useState(true);
+
   const toggleSidebar = () => {
     setOpen(!open);
   };
 
   const [isSticky, setIsSticky] = useState(false);
+
   const ref = useRef(null);
 
   const [showSearch, setShowSearch] = useState(false);
@@ -47,232 +48,200 @@ const Header = () => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 70);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <>
-      {banner && (
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-          sx={{ backgroundColor: "#F5F5F5", px: 1 }}
-        >
-          <IconButton></IconButton>
-          <Typography
-            sx={{
-              fontSize: {
-                xs: "10px",
-                sm: "12px",
-              },
-              color: "#000",
-              fontFamily: fonts.styreneLight,
-            }}
-          >
-            We’re starting with the marketplace first — to help designers start
-            selling and getting seen now. As we grow together, we’ll introduce
-            tools to support your brand, creativity, and professional
-            development.
-          </Typography>
-          <IconButton onClick={() => setBanner(false)}>
-            <Close
-              sx={{ color: "#000" }}
-              onClick={() => setShowSearch(false)}
-            />
-          </IconButton>
-        </Stack>
-      )}
-      <Box
-        ref={ref}
-        sx={{
-          position: isSticky ? "fixed" : "relative",
-          top: 0,
-          width: isSticky ? (smScreen ? "90%" : "97.5%") : "auto",
-          backgroundColor: "#fff",
-          zIndex: 5,
-          animation: isSticky ? `${slideDown} 0.4s ease-in-out` : "none",
-          transition: "all 0.3s ease-in-out",
-          p: 3,
-          py: isSticky ? 1 : 2,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          boxShadow: isSticky ? 3 : "none",
-          borderBottom: "1px solid #DDDDDD",
-        }}
+    <Box
+      ref={ref}
+      sx={{
+        position: isSticky ? "fixed" : "relative",
+        top: 0,
+        width: isSticky ? (smScreen ? "90%" : "97.5%") : "auto",
+        backgroundColor: "#fff",
+        zIndex: 5,
+        animation: isSticky ? `${slideDown} 0.4s ease-in-out` : "none",
+        transition: "all 0.3s ease-in-out",
+        p: 3,
+        py: isSticky ? 1 : 2,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        boxShadow: isSticky ? 3 : "none",
+        borderBottom: "1px solid #DDDDDD",
+      }}
+    >
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        gap={2}
+        width={mdScreen ? "100%" : "50%"}
       >
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          gap={2}
-          width={mdScreen ? "100%" : "50%"}
-        >
-          {smScreen && (
-            <IconButton onClick={toggleSidebar}>
-              <MenuOutlined />
-            </IconButton>
-          )}
-          <img
-            onClick={() => navigate("/")}
-            src={logo}
-            alt="logo"
-            style={{
-              width: "50px",
-              height: "50px",
-              cursor: "pointer",
-            }}
-          />
-          {smScreen ? (
-            <MobileDrawer open={open} toggleSidebar={toggleSidebar} />
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                height: "100%",
-                flexWrap: "wrap",
-                gap: 4,
-                width: "50%",
-              }}
-            >
-              {nav.map((item) => (
-                <Typography
-                  onClick={() => navigate(item.link)}
-                  sx={{
-                    color: "#000",
-                    fontWeight: 400,
-                    fontSize: "14px",
-                    fontFamily: fonts.styreneLight,
-                    letterSpacing: "0.5px",
-                    cursor: "pointer",
-                    "&:hover": {
-                      color: "#0F3460",
-                      fontFamily: fonts.styreneMedium,
-                      transition: "all 0.3s ease-in-out",
-                    },
-                  }}
-                >
-                  {item.name}
-                </Typography>
-              ))}
-            </Box>
-          )}
-        </Stack>
-
-        <Stack direction={"row"} alignItems={"center"} gap={2}>
-          <IconButton onClick={() => setShowSearch(true)}>
-            <SearchOutlined sx={{ color: "#000" }} />
+        {smScreen && (
+          <IconButton onClick={toggleSidebar}>
+            <MenuOutlined />
           </IconButton>
-        </Stack>
-
-        {showSearch && (
+        )}
+        <img
+          onClick={() => navigate("/")}
+          src={logo}
+          alt="logo"
+          style={{
+            width: "50px",
+            height: "50px",
+            cursor: "pointer",
+          }}
+        />
+        {smScreen ? (
+          <MobileDrawer open={open} toggleSidebar={toggleSidebar} />
+        ) : (
           <Box
             sx={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: smScreen ? "15%" : "20%",
-              backdropFilter: "blur(10px)",
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-              animation: `${slideDown} 0.4s ease-in-out`,
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              zIndex: 10,
               display: "flex",
-              flexDirection: "column",
+              alignItems: "center",
+              height: "100%",
+              flexWrap: "wrap",
+              gap: 4,
+              width: "50%",
             }}
-            onClick={() => setShowSearch(false)}
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                px: 3,
-                py: 2,
-                borderBottom: "1px solid #DDD",
-                backgroundColor: "#fff",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                onClick={() => navigate("/")}
-                src={logo}
-                alt="logo"
-                style={{
-                  width: "50px",
-                  height: "50px",
+            {nav.map((item) => (
+              <Typography
+                onClick={() => navigate(item.link)}
+                sx={{
+                  color: "#000",
+                  fontWeight: 400,
+                  fontSize: "14px",
+                  fontFamily: fonts.styreneLight,
+                  letterSpacing: "0.5px",
                   cursor: "pointer",
+                  "&:hover": {
+                    color: "#0F3460",
+                    fontFamily: fonts.styreneMedium,
+                    transition: "all 0.3s ease-in-out",
+                  },
                 }}
-              />
-              <IconButton onClick={() => setShowSearch(false)}>
-                <Close sx={{ color: "#000" }} />
-              </IconButton>
-            </Box>
-
-            <Box
-              sx={{
-                px: 4,
-                py: 2,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 2,
-                // bgcolor: "red",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Stack
-                direction={"row"}
-                alignItems={"center"}
-                gap={2}
-                sx={{ width: "100%" }}
               >
-                <SearchOutlined sx={{ color: "#000" }} />
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  autoFocus
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      navigate("/products", {
-                        state: { searchQuery: e.target.value },
-                      });
-                      setShowSearch(false);
-                    }
-                  }}
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    background: "transparent",
-                    fontSize: "18px",
-                    fontFamily: fonts.styreneRegular,
-                    width: "100%",
-                  }}
-                />
-              </Stack>
-              {search && (
-                <IconButton
-                  onClick={() => {
-                    navigate("/products", {
-                      state: { searchQuery: search },
-                    });
-                    setShowSearch(false);
-                  }}
-                  sx={{ height: 30, width: 30 }}
-                >
-                  <ArrowForward sx={{ fontSize: "32px" }} />
-                </IconButton>
-              )}
-            </Box>
+                {item.name}
+              </Typography>
+            ))}
           </Box>
         )}
-      </Box>
-    </>
+      </Stack>
+
+      <Stack direction={"row"} alignItems={"center"} gap={2}>
+        <IconButton onClick={() => setShowSearch(true)}>
+          <SearchOutlined sx={{ color: "#000" }} />
+        </IconButton>
+      </Stack>
+
+      {showSearch && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: smScreen ? "15%" : "20%",
+            backdropFilter: "blur(10px)",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            animation: `${slideDown} 0.4s ease-in-out`,
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
+          }}
+          onClick={() => setShowSearch(false)}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              px: 3,
+              py: 2,
+              borderBottom: "1px solid #DDD",
+              backgroundColor: "#fff",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              onClick={() => navigate("/")}
+              src={logo}
+              alt="logo"
+              style={{
+                width: "50px",
+                height: "50px",
+                cursor: "pointer",
+              }}
+            />
+            <IconButton onClick={() => setShowSearch(false)}>
+              <Close sx={{ color: "#000" }} />
+            </IconButton>
+          </Box>
+
+          <Box
+            sx={{
+              px: 4,
+              py: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 2,
+              // bgcolor: "red",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              gap={2}
+              sx={{ width: "100%" }}
+            >
+              <SearchOutlined sx={{ color: "#000" }} />
+              <input
+                type="text"
+                placeholder="Search..."
+                autoFocus
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigate("/products", {
+                      state: { searchQuery: e.target.value },
+                    });
+                    setShowSearch(false);
+                  }
+                }}
+                style={{
+                  border: "none",
+                  outline: "none",
+                  background: "transparent",
+                  fontSize: "18px",
+                  fontFamily: fonts.styreneRegular,
+                  width: "100%",
+                }}
+              />
+            </Stack>
+            {search && (
+              <IconButton
+                onClick={() => {
+                  navigate("/products", {
+                    state: { searchQuery: search },
+                  });
+                  setShowSearch(false);
+                }}
+                sx={{ height: 30, width: 30 }}
+              >
+                <ArrowForward sx={{ fontSize: "24px" }} />
+              </IconButton>
+            )}
+          </Box>
+        </Box>
+      )}
+    </Box>
   );
 };
 

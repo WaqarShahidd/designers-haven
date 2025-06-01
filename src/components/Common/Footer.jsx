@@ -3,19 +3,15 @@ import {
   Button,
   Grid,
   Stack,
-  TextField,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
 import { footerData } from "../../assets/data/dummyData";
 import { fonts } from "../../theme/theme";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const Footer = () => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
-  const [email, setEmail] = useState("");
   return (
     <Box
       sx={{
@@ -117,6 +113,37 @@ const Footer = () => {
               })}
             </Box>
           ))}
+
+          <Button
+            onClick={() =>
+              window.open(
+                "https://docs.google.com/forms/d/e/1FAIpQLSeRNEHi0dqkQHZD_SZD2OseTZmCpQ43GLlGZTMnZW3UP_lY5Q/viewform?usp=header",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+            variant="contained"
+            sx={{
+              backgroundColor: "#000",
+              color: "#fff",
+              fontFamily: !smScreen ? fonts.styreneRegular : fonts.styreneLight,
+              fontSize: "15px",
+              borderRadius: "0px",
+              mt: 2,
+              px: 3,
+              py: 1,
+              textTransform: "none",
+              width: "40%",
+              minWidth: 0,
+              boxShadow: "none",
+              "&:hover": {
+                backgroundColor: "#333",
+                boxShadow: "none",
+              },
+            }}
+          >
+            Leave Feedback
+          </Button>
         </Grid>
         <Grid size={{ xs: 12 }}>
           <Typography
@@ -126,13 +153,27 @@ const Footer = () => {
               fontSize: "11px",
               lineHeight: "17px",
               fontFamily: fonts.styreneRegular,
-              mb: 1.5,
               textAlign: "center",
             }}
           >
             You’re viewing an early access version of Designer’s Haven. Orders
             are handled manually while we build our full checkout and delivery
             tools.
+          </Typography>
+        </Grid>
+        <Grid size={{ xs: 12 }}>
+          <Typography
+            sx={{
+              color: "#565656",
+              textTransform: "uppercase",
+              fontSize: "11px",
+              lineHeight: "17px",
+              fontFamily: fonts.styreneRegular,
+              textAlign: "center",
+              mb: 1.5,
+            }}
+          >
+            © {new Date().getFullYear()} Designer’s Haven. All rights reserved.
           </Typography>
         </Grid>
       </Grid>

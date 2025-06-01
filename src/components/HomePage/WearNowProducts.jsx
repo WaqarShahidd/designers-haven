@@ -17,7 +17,7 @@ const WearNowProducts = () => {
         sx={{
           color: "#000",
           fontSize: "18px",
-          fontFamily: fonts.styreneRegular,
+          fontFamily: fonts.styreneMedium,
           maxWidth: isSmallScreen ? null : "50%",
           mb: 4,
         }}

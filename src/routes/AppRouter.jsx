@@ -5,6 +5,7 @@ import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import Products from "../pages/Products/Products";
 import StoreFront from "../pages/StoreFront/StoreFront";
 import About from "../pages/About/About";
+import Designers from "../pages/Designers/Designers";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
         <Route path="/store/:id" element={<StoreFront />} />
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/designers" element={<Designers />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

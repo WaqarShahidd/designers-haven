@@ -26,7 +26,7 @@ const BottomNote = () => {
           textAlign: "center",
         }}
       >
-        The Art of Fewer, Better Choices
+        Crafted with Purpose, Rooted in Identity
       </Typography>
       <Typography
         sx={{
@@ -38,11 +38,10 @@ const BottomNote = () => {
           maxWidth: smScreen ? null : "50%",
         }}
       >
-        Opting for quality over quantity means selecting timeless, durable, and
-        responsibly made items. This approach simplifies our lives and fosters a
-        deeper appreciation for our surroundings. Emphasizing longevity and
-        responsible production resonates with a more sustainable and mindful
-        lifestyle.
+        Choosing quality over quantity means celebrating custom-made pieces that
+        reflect the stories, culture, and creativity of Zimbabwean designers —
+        with roots in Africa’s rich design heritage. Every piece is a statement
+        of care, individuality, and timeless style.
       </Typography>
     </Box>
   );

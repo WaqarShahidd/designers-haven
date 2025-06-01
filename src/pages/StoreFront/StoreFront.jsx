@@ -40,6 +40,7 @@ const StoreFront = () => {
           flexDirection: smScreen ? "column" : "row",
           alignItems: smScreen ? "center" : "flex-start",
           borderBottom: "1px solid #DDDDDD",
+          gap: smScreen ? 2 : 4,
         }}
       >
         <Box
@@ -51,7 +52,6 @@ const StoreFront = () => {
             height: "100px",
             borderRadius: "50%",
             objectFit: "contain",
-            mr: 2,
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             border: "1px solid #DDDDDD",
           }}
@@ -66,6 +66,16 @@ const StoreFront = () => {
             }}
           >
             {store.name}
+          </Typography>
+          <Typography
+            sx={{
+              color: "#000",
+              fontSize: "18px",
+              fontFamily: fonts.styreneLight,
+              textAlign: smScreen ? "center" : "left",
+            }}
+          >
+            {store.location}
           </Typography>
           <Typography
             sx={{

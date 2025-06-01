@@ -3,25 +3,25 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 export const nav = [
   { id: 1, name: "Home", link: "/" },
-  // { id: 2, name: "About", link: "/about" },
-  { id: 3, name: "Shop", link: "/products" },
+  { id: 2, name: "Shop", link: "/products" },
+  { id: 3, name: "Meet the Designers", link: "/designers" },
 ];
 
 export const bestSellerData = [
   {
     id: 1,
     name: "New Arrivals",
-    image: require("../images/best1.png"),
+    image: "https://designershavenimages.s3.eu-north-1.amazonaws.com/p1.jpg",
   },
   {
     id: 2,
     name: "The Casual Wear",
-    image: require("../images/best2.jpg"),
+    image: "https://designershavenimages.s3.eu-north-1.amazonaws.com/p3.jpg",
   },
   {
     id: 3,
     name: "Best Seller",
-    image: require("../images/best3.jpg"),
+    image: "https://designershavenimages.s3.eu-north-1.amazonaws.com/p6.jpg",
   },
 ];
 
@@ -137,13 +137,13 @@ export const wearNowData = [
 export const featuredData = [
   {
     id: 1,
-    name: "The Smart Chic",
-    image: require("../images/homepage-product1.png"),
+    name: "Urban Elegance",
+    image: "https://designershavenimages.s3.eu-north-1.amazonaws.com/p2.jpg",
   },
   {
     id: 2,
     name: "Ready To Go",
-    image: require("../images/homepage-product2.png"),
+    image: "https://designershavenimages.s3.eu-north-1.amazonaws.com/p4.jpg",
   },
 ];
 
@@ -164,8 +164,7 @@ export const footerData = [
       },
       {
         name: "Instagram",
-        linkUrl:
-          "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products",
+        linkUrl: "https://www.instagram.com/designershavenzw/",
         Icon: Instagram,
         iconStyle: {
           color: "#E1306C",
