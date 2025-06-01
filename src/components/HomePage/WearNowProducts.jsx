@@ -16,7 +16,7 @@ const WearNowProducts = () => {
       <Typography
         sx={{
           color: "#000",
-          fontSize: "18px",
+          fontSize: "20px",
           fontFamily: fonts.styreneMedium,
           maxWidth: isSmallScreen ? null : "50%",
           mb: 4,

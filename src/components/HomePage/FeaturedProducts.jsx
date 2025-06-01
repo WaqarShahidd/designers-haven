@@ -40,7 +40,7 @@ const FeaturedProducts = () => {
                 alt={item.name}
                 sx={{
                   width: "100%",
-                  height: smScreen ? "450px" : "500px",
+                  height: smScreen ? "450px" : "650px",
                   objectFit: "cover",
                   display: "block",
                 }}

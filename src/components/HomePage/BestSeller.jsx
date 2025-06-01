@@ -26,8 +26,9 @@ const BestSeller = () => {
           maxWidth: smScreen ? null : "50%",
         }}
       >
-        Elevate your lifestyle with a more intelligent, superior wardrobe. Our
-        range is crafted sustainably with longevity in mind.
+        Celebrate African craftsmanship through timeless, custom and
+        ready-to-wear fashion. Each piece is intentionally created for those who
+        value quality, culture, and individuality.
       </Typography>
 
       <Grid container sx={{ mt: 4 }} spacing={2}>
@@ -52,7 +53,7 @@ const BestSeller = () => {
                 alt={item.name}
                 sx={{
                   width: "100%",
-                  height: smScreen ? "250px" : "450px",
+                  height: smScreen ? "300px" : "500px",
                   objectFit: "cover",
                   display: "block",
                 }}

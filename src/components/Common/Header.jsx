@@ -104,7 +104,7 @@ const Header = () => {
               height: "100%",
               flexWrap: "wrap",
               gap: 4,
-              width: "50%",
+              width: "75%",
             }}
           >
             {nav.map((item) => (

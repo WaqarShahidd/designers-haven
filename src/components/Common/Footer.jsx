@@ -133,7 +133,7 @@ const Footer = () => {
               px: 3,
               py: 1,
               textTransform: "none",
-              width: "40%",
+              width: smScreen ? "100%" : "40%",
               minWidth: 0,
               boxShadow: "none",
               "&:hover": {
@@ -161,7 +161,7 @@ const Footer = () => {
             tools.
           </Typography>
         </Grid>
-        <Grid size={{ xs: 12 }}>
+        {/* <Grid size={{ xs: 12 }}>
           <Typography
             sx={{
               color: "#565656",
@@ -175,7 +175,7 @@ const Footer = () => {
           >
             © {new Date().getFullYear()} Designer’s Haven. All rights reserved.
           </Typography>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       {/* <Box
