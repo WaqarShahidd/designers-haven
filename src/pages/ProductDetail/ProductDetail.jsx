@@ -1,27 +1,23 @@
 import { Box, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
-import React, { useState } from "react";
-import { productDetailsData, wearNowData } from "../../assets/data/dummyData";
 import { fonts } from "../../theme/theme";
 import Layout from "../../layout/Layout";
 import CustomBtn from "../../components/Common/CustomBtn";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RelatedProducts from "../../components/Products/RelatedProducts";
+import { allProducts } from "../../assets/data/allProducts";
+import { allDesigners } from "../../assets/data/allDesigners";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
-  const colors = [
-    { color: "#C4C4B0", name: "Beige" },
-    { color: "#000000", name: "Black" },
-    { color: "#9fc5e8", name: "Blue" },
-  ];
-  const [selectedColor, setSelectedColor] = useState(colors?.[0]);
-  const selectedColorName = colors?.find(
-    (c) => c.color === selectedColor
-  )?.name;
 
-  const sizes = ["S", "M", "L", "XL"];
-  const [selectedSize, setSelectedSize] = useState(sizes?.[0]);
-  const selectedSizeName = colors?.find((c) => c.color === selectedSize)?.name;
+  const params = useParams();
+
+  const productId = params.id;
+
+  const product = allProducts.find((item) => item.id === parseInt(productId));
+  const designer = allDesigners.find(
+    (designer) => designer.id === product.designer
+  );
 
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
@@ -30,33 +26,19 @@ const ProductDetail = () => {
       <Box sx={{ p: 4 }}>
         <Grid container spacing={2}>
           <Grid item size={{ xs: 12, sm: 6 }} sx={{ order: { xs: 1, sm: 0 } }}>
-            {productDetailsData.map((item) => (
-              <Box
-                key={item.id}
-                sx={{
-                  width: "100%",
-                  height: "auto",
-                  overflow: "hidden",
-                  borderRadius: 1,
-                  cursor: "pointer",
-                  mb: 1,
-                }}
-              >
-                <Box
-                  component="img"
-                  src={item.image}
-                  alt={item.name}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </Box>
-            ))}
+            <Box
+              component="img"
+              src={product.image}
+              alt={product.name}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
           </Grid>
-          <Grid item size={{ xs: 12, sm: 6 }}>
+          <Grid item size={{ xs: 12, sm: 6 }} sx={{ order: { xs: 1, sm: 0 } }}>
             <Box sx={{ p: 2 }}>
               <Typography
                 sx={{
@@ -67,7 +49,7 @@ const ProductDetail = () => {
                   mb: 2,
                 }}
               >
-                Cool Shirt
+                {product.name}
               </Typography>
               <Typography
                 sx={{
@@ -78,7 +60,7 @@ const ProductDetail = () => {
                   mb: 1,
                 }}
               >
-                $50.00
+                ${product.price}
               </Typography>
               <Typography
                 sx={{
@@ -90,10 +72,7 @@ const ProductDetail = () => {
                   maxWidth: smScreen ? "100%" : "65%",
                 }}
               >
-                This is a cool shirt that you can wear to any occasion. It is
-                made of high-quality fabric and is very comfortable to wear. The
-                design is modern and stylish, making it a great addition to your
-                wardrobe.
+                {product.description}
               </Typography>
 
               <Stack
@@ -107,16 +86,16 @@ const ProductDetail = () => {
                     textDecoration: "underline",
                   },
                 }}
-                onClick={() => navigate("/store/1")}
+                onClick={() => navigate(`/store/${product.designer}`)}
               >
                 <Box
                   component={"img"}
-                  src={require("../../assets/images/brand-logo.jpg")}
+                  src={designer.image}
                   alt={"brand-logo"}
                   sx={{
                     width: 50,
                     height: 50,
-                    objectFit: "cover",
+                    objectFit: "contain",
                     borderRadius: "50%",
                     border: "1px solid #ddd",
                   }}
@@ -129,7 +108,7 @@ const ProductDetail = () => {
                     color: "#000",
                   }}
                 >
-                  Brand Name
+                  {designer.name}
                 </Typography>
               </Stack>
 
@@ -142,15 +121,15 @@ const ProductDetail = () => {
                   mb: 1,
                 }}
               >
-                Product Color:{" "}
+                Order Type:{" "}
                 <Typography
                   component={"span"}
                   sx={{ fontSize: "16px", fontFamily: fonts.styreneLight }}
                 >
-                  {selectedColorName}
+                  {product.orderType}
                 </Typography>
               </Typography>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   flexDirection: "row",
@@ -185,9 +164,9 @@ const ProductDetail = () => {
                     />
                   </Box>
                 ))}
-              </Box>
+              </Box> */}
 
-              <Box sx={{ mt: 4 }}>
+              {/* <Box sx={{ mt: 4 }}>
                 <Typography
                   sx={{
                     fontSize: "16px",
@@ -238,15 +217,18 @@ const ProductDetail = () => {
                     </Box>
                   ))}
                 </Box>
-              </Box>
+              </Box> */}
               <CustomBtn
                 text={"Contact to Order"}
                 width={smScreen ? "100%" : "70%"}
                 secondary={false}
+                onClick={() =>
+                  window.open(`https://wa.me/${designer.whatsApp}`, "_blank")
+                }
               />
             </Box>
           </Grid>
-          <Grid item size={{ xs: 12 }}>
+          <Grid item size={{ xs: 12 }} sx={{ order: { xs: 1, sm: 0 } }}>
             <Typography
               sx={{
                 fontSize: "24px",

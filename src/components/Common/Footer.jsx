@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Grid,
+  Stack,
   TextField,
   Typography,
   useMediaQuery,
@@ -10,6 +11,7 @@ import React, { useState } from "react";
 import { footerData } from "../../assets/data/dummyData";
 import { fonts } from "../../theme/theme";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+
 const Footer = () => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
@@ -26,64 +28,113 @@ const Footer = () => {
         border: "1px solid #DDDDDD",
       }}
     >
-      <Grid container sx={{ width: smScreen ? "100%" : "50%" }}>
-        {footerData.map((item) => (
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            key={item.id}
-            sx={{
-              mb: smScreen ? 2 : 0,
-            }}
-          >
+      <Grid container spacing={4}>
+        <Grid
+          size={{ xs: 12, sm: 6 }}
+          sx={{
+            mb: smScreen ? 2 : 0,
+          }}
+        >
+          <Stack direction={"row"} gap={1}>
+            <img
+              src={require("../../assets/icons/logo.png")}
+              alt="logo"
+              style={{
+                width: "75px",
+                height: "75px",
+                cursor: "pointer",
+              }}
+            />
             <Typography
               sx={{
-                color: "#565656",
-                textTransform: "uppercase",
-                fontSize: "11px",
-                lineHeight: "17px",
-                fontFamily: fonts.styreneRegular,
-                mb: 1.5,
+                color: "#000",
+                fontFamily: fonts.styreneLight,
+                fontSize: "18px",
+                lineHeight: "24px",
               }}
             >
-              {item.title}
+              Based in Zimbabwe – For now, orders are handled directly by
+              designers with local delivery options. International shipping is
+              coming soon as we grow.
             </Typography>
-
-            <Box
-              sx={{
-                alignItems: "center",
-                display: "flex",
-              }}
-            >
+          </Stack>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6 }}>
+          {footerData.map((item) => (
+            <Box key={item.id}>
               <Typography
-                component="a"
-                href={
-                  "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
                 sx={{
-                  color: "#000",
-                  fontSize: "16px",
-                  lineHeight: "20px",
-                  fontFamily: "Sora",
-
-                  mr: 1,
-                  cursor: "pointer",
-                  "&:hover": {
-                    textDecoration: "underline",
-                  },
+                  color: "#565656",
+                  textTransform: "uppercase",
+                  fontSize: "11px",
+                  lineHeight: "17px",
+                  fontFamily: fonts.styreneRegular,
+                  mb: 1.5,
                 }}
               >
-                +263 78 576 3984
+                {item.title}
               </Typography>
-              <WhatsAppIcon
-                sx={{
-                  fontSize: 16,
-                }}
-              />
+
+              {item.links.map((i) => {
+                const IconComponent = i.Icon;
+                return (
+                  <Box
+                    key={i.name}
+                    sx={{
+                      alignItems: "center",
+                      display: "flex",
+                      gap: 1,
+                      mb: 1,
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      if (i.linkUrl) {
+                        window.open(i.linkUrl, "_blank", "noopener,noreferrer");
+                      }
+                    }}
+                  >
+                    <IconComponent sx={i.iconStyle} />
+                    <Typography
+                      component="a"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        color: "#000",
+                        fontSize: "16px",
+                        lineHeight: "20px",
+                        fontFamily: fonts.styreneRegular,
+                        mr: 1,
+
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      {i.name}
+                    </Typography>
+                  </Box>
+                );
+              })}
             </Box>
-          </Grid>
-        ))}
+          ))}
+        </Grid>
+        <Grid size={{ xs: 12 }}>
+          <Typography
+            sx={{
+              color: "#565656",
+              textTransform: "uppercase",
+              fontSize: "11px",
+              lineHeight: "17px",
+              fontFamily: fonts.styreneRegular,
+              mb: 1.5,
+              textAlign: "center",
+            }}
+          >
+            You’re viewing an early access version of Designer’s Haven. Orders
+            are handled manually while we build our full checkout and delivery
+            tools.
+          </Typography>
+        </Grid>
       </Grid>
 
       {/* <Box

@@ -1,16 +1,16 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { fonts } from "../../theme/theme";
 import { useNavigate } from "react-router-dom";
+import { allDesigners } from "../../assets/data/allDesigners";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
   const [hover, setHover] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(item.colors?.[0]);
 
-  const selectedColorName = item.colors?.find(
-    (c) => c.color === selectedColor
-  )?.name;
+  const designer = allDesigners.find(
+    (designer) => designer.id === item.designer
+  );
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -37,7 +37,7 @@ const ProductCard = ({ item }) => {
           sx={{
             width: "100%",
             height: "100%",
-            objectFit: "cover",
+            objectFit: "contain",
             display: "block",
           }}
         />
@@ -54,12 +54,24 @@ const ProductCard = ({ item }) => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              alignItems: "center",
               gap: 1.5,
-              px: 2,
             }}
           >
-            {selectedColorName && (
+            <Stack direction="row" alignItems="center" gap={1}>
+              <Box
+                component={"img"}
+                src={designer.image}
+                alt={designer.name}
+                sx={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  objectFit: "contain",
+                }}
+              />
               <Typography
+                component={"span"}
                 sx={{
                   fontSize: "10px",
                   fontFamily: fonts.styreneRegular,
@@ -67,10 +79,11 @@ const ProductCard = ({ item }) => {
                   color: "#000",
                 }}
               >
-                {selectedColorName}
+                {designer.name}
               </Typography>
-            )}
-            <Box
+            </Stack>
+
+            {/* <Box
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -105,7 +118,7 @@ const ProductCard = ({ item }) => {
                   />
                 </Box>
               ))}
-            </Box>
+            </Box> */}
           </Box>
         )}
       </Box>

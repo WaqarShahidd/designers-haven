@@ -1,6 +1,7 @@
 import {
   Box,
   Grid,
+  IconButton,
   Menu,
   MenuItem,
   Stack,
@@ -10,12 +11,15 @@ import {
 import React, { useState } from "react";
 import Layout from "../../layout/Layout";
 import { fonts } from "../../theme/theme";
-import { ArrowDropDown } from "@mui/icons-material";
-import { wearNowData } from "../../assets/data/dummyData";
 import ProductCard from "../../components/Products/ProductCard";
 import FilterDrawer from "../../components/Products/FilterDrawer";
+import { allProducts } from "../../assets/data/allProducts";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Close } from "@mui/icons-material";
 
 const Products = () => {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const menuOpen = Boolean(anchorEl);
 
@@ -30,15 +34,24 @@ const Products = () => {
 
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
+  const location = useLocation();
+
+  const searchQuery = location.state?.searchQuery || "";
+
+  const filteredProducts = allProducts.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <Layout>
       <Box
         sx={{
           p: 4,
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
+          flexDirection: "column",
+          gap: 2,
+          // justifyContent: "space-between",
+          // alignItems: "center",
           borderBottom: "1px solid #DDDDDD",
         }}
       >
@@ -52,7 +65,39 @@ const Products = () => {
           Shop
         </Typography>
 
-        <Stack
+        {searchQuery && (
+          <Stack direction={"row"} spacing={2} alignItems={"center"}>
+            <Typography
+              sx={{
+                color: "#888",
+                fontSize: "16px",
+                fontFamily: fonts.styreneLight,
+              }}
+            >
+              {filteredProducts.length} results for{" "}
+              <Typography
+                component={"span"}
+                sx={{
+                  color: "#000",
+                  fontSize: "16px",
+                  fontFamily: fonts.styreneMedium,
+                  fontWeight: 500,
+                }}
+              >
+                "{searchQuery}"
+              </Typography>
+            </Typography>
+            <IconButton
+              onClick={() =>
+                navigate("/products", { state: { searchQuery: "" } })
+              }
+            >
+              <Close sx={{ color: "#000" }} />
+            </IconButton>
+          </Stack>
+        )}
+
+        {/* <Stack
           direction={"row"}
           spacing={2}
           alignItems={"center"}
@@ -96,7 +141,7 @@ const Products = () => {
           >
             Filter
           </Typography>
-        </Stack>
+        </Stack> */}
         <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
           <MenuItem
             onClick={() => handleClose()}
@@ -143,7 +188,7 @@ const Products = () => {
 
       <Box sx={{ p: 4 }}>
         <Grid container spacing={2}>
-          {wearNowData.map((item) => (
+          {filteredProducts.map((item) => (
             <Grid size={{ xs: 12, sm: 4, md: 3, lg: 2.4 }} item key={item.id}>
               <ProductCard key={item.id} item={item} />
             </Grid>

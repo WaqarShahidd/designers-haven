@@ -42,7 +42,7 @@ const Banner = () => {
             sx={{
               color: "#fff",
               fontSize: "28px",
-              fontFamily: fonts.styreneLight,
+              fontFamily: fonts.styreneMedium,
               maxWidth: smScreen ? "75%" : "50%",
               lineHeight: "32px",
               fontWeight: 600,
@@ -52,13 +52,15 @@ const Banner = () => {
             Designer’s Haven
           </Typography>
           <Typography
-            variant="h3"
             sx={{
               color: "#fff",
-              fontSize: "28px",
+              fontSize: {
+                xs: "18px",
+                sm: "24px",
+              },
               fontFamily: fonts.styreneLight,
               maxWidth: smScreen ? "75%" : "50%",
-              lineHeight: "32px",
+              lineHeight: smScreen ? "28px" : "32px",
               mb: 2,
             }}
           >
@@ -67,11 +69,6 @@ const Banner = () => {
             Zimbabwean fashion designers. Our mission is to connect local talent
             with a wider audience across Africa and beyond.
           </Typography>
-          <img
-            src="https://drive.google.com/uc?export=view&id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U"
-            alt="Image"
-            width="300"
-          />
 
           <Button
             onClick={() => navigate("/products")}

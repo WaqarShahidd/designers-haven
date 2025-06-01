@@ -1,5 +1,3 @@
-import { Box } from "@mui/material";
-import Header from "../../components/Common/Header";
 import Banner from "../../components/HomePage/Banner";
 import BestSeller from "../../components/HomePage/BestSeller";
 import WearNowProducts from "../../components/HomePage/WearNowProducts";
@@ -12,6 +10,7 @@ const HomePage = () => {
   return (
     <Layout>
       <EarlyAccessModal />
+
       <Banner />
 
       <BestSeller />

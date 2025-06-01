@@ -55,7 +55,7 @@ const MobileDrawer = ({ open, toggleSidebar }) => {
             >
               DH.
             </Typography>
-            {nav?.map((item, index) => {
+            {nav?.map((item) => {
               return (
                 <ListItem key={item.id} disablePadding>
                   <ListItemButton

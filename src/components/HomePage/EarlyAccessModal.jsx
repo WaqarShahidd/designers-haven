@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Box, Modal, Typography, Button, Fade, Backdrop } from "@mui/material";
+import { fonts } from "../../theme/theme";
 
 const EarlyAccessModal = () => {
   const [open, setOpen] = useState(false);
 
-  // Open the modal on page load
   useEffect(() => {
     setOpen(true);
   }, []);
@@ -36,11 +36,13 @@ const EarlyAccessModal = () => {
         >
           <Typography
             variant="h6"
-            sx={{ fontWeight: 600, mb: 2, fontFamily: "styreneLight" }}
+            sx={{ fontWeight: 600, mb: 2, fontFamily: fonts.styreneLight }}
           >
             🚧 Designer’s Haven is in Early Access
           </Typography>
-          <Typography sx={{ fontSize: 14, mb: 2, fontFamily: "styreneLight" }}>
+          <Typography
+            sx={{ fontSize: 14, mb: 2, fontFamily: fonts.styreneLight }}
+          >
             For now, all orders are placed directly with designers via WhatsApp.
             Features like in-app payments, delivery partnerships, and custom
             dashboards are coming soon — guided by feedback and demand.

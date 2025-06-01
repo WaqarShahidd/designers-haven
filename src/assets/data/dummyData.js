@@ -1,3 +1,4 @@
+import { Instagram } from "@mui/icons-material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 export const nav = [
@@ -31,7 +32,7 @@ export const wearNowData = [
     price: "90",
     orderType: "Custom-Made",
     image:
-      "https://drive.usercontent.google.com/download?id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U&export=view&authuser=0",
+      "https://drive.google.com/uc?export=view&id=1cB3-C6aSQUggKemDxqO2kIN3l2Klkl8U",
     colors: [
       {
         name: "Black",
@@ -152,47 +153,27 @@ export const footerData = [
     title: "Contact Us",
     links: [
       {
-        name: "whatsApp",
+        name: "WhatsApp",
         linkUrl:
           "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products",
-        icon: (
-          <WhatsAppIcon
-            sx={{
-              fontSize: 16,
-            }}
-          />
-        ),
+        Icon: WhatsAppIcon,
+        iconStyle: {
+          color: "#25D366",
+          fontSize: "24px",
+        },
       },
       {
         name: "Instagram",
         linkUrl:
           "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products",
-        icon: (
-          <WhatsAppIcon
-            sx={{
-              fontSize: 16,
-            }}
-          />
-        ),
+        Icon: Instagram,
+        iconStyle: {
+          color: "#E1306C",
+          fontSize: "24px",
+        },
       },
     ],
   },
-  // {
-  //   id: 2,
-  //   title: "CUSTOMERS",
-  //   links: ["Start a Return", "Return Policy", "Shipping Policy", "FAQs"],
-  // },
-  // {
-  //   id: 3,
-  //   title: "Company",
-  //   links: [
-  //     "About Us",
-  //     "Careers",
-  //     "Privacy Policy",
-  //     "Terms of Service",
-  //     "Accessibility Statement",
-  //   ],
-  // },
 ];
 
 export const productDetailsData = [

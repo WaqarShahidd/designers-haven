@@ -2,10 +2,14 @@ import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import { featuredData } from "../../assets/data/dummyData";
 import { fonts } from "../../theme/theme";
+import { useNavigate } from "react-router-dom";
 
 const FeaturedProducts = () => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const mdScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
+
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -18,6 +22,7 @@ const FeaturedProducts = () => {
         {featuredData.map((item) => (
           <Grid item size={{ xs: 12, sm: 6 }} key={item.id}>
             <Box
+              onClick={() => navigate("/products")}
               sx={{
                 position: "relative",
                 cursor: "pointer",

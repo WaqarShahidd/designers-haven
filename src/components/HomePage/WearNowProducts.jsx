@@ -1,7 +1,5 @@
-import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { fonts } from "../../theme/theme";
-import { wearNowData } from "../../assets/data/dummyData";
-import ProductCard from "../Products/ProductCard";
 import RelatedProducts from "../Products/RelatedProducts";
 
 const WearNowProducts = () => {

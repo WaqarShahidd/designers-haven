@@ -1,11 +1,12 @@
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
-import { wearNowData } from "../../assets/data/dummyData";
 import ProductCard from "./ProductCard";
 import { fonts } from "../../theme/theme";
+import { allProducts } from "../../assets/data/allProducts";
 
 const RelatedProducts = () => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
+  const limitedProducts = allProducts.slice(0, 5);
   return (
     <>
       {isSmallScreen ? (
@@ -17,7 +18,7 @@ const RelatedProducts = () => {
             pb: 1,
           }}
         >
-          {wearNowData.map((item) => (
+          {limitedProducts.map((item) => (
             <Box
               key={item.id}
               sx={{
@@ -61,7 +62,7 @@ const RelatedProducts = () => {
         </Box>
       ) : (
         <Grid container spacing={2}>
-          {wearNowData.map((item) => (
+          {limitedProducts.map((item) => (
             <Grid item key={item.id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
               <ProductCard item={item} />
             </Grid>
