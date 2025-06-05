@@ -144,7 +144,7 @@ const Header = () => {
             top: 0,
             left: 0,
             width: "100%",
-            height: smScreen ? "15%" : "20%",
+            height: "150px",
             backdropFilter: "blur(10px)",
             backgroundColor: "rgba(255, 255, 255, 0.8)",
             animation: `${slideDown} 0.4s ease-in-out`,

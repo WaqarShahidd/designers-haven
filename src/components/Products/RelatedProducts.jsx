@@ -2,8 +2,11 @@ import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { fonts } from "../../theme/theme";
 import { allProducts } from "../../assets/data/allProducts";
+import { useNavigate } from "react-router-dom";
 
 const RelatedProducts = () => {
+  const navigate = useNavigate();
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const limitedProducts = allProducts.slice(0, 5);
@@ -24,6 +27,7 @@ const RelatedProducts = () => {
               sx={{
                 minWidth: "200px",
               }}
+              onClick={() => navigate(`/product/${item.id}`)}
             >
               <Box
                 component="img"

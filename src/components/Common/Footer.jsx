@@ -41,18 +41,31 @@ const Footer = () => {
                 cursor: "pointer",
               }}
             />
-            <Typography
-              sx={{
-                color: "#000",
-                fontFamily: fonts.styreneLight,
-                fontSize: "18px",
-                lineHeight: "24px",
-              }}
-            >
-              Based in Zimbabwe – For now, orders are handled directly by
-              designers with local delivery options. International shipping is
-              coming soon as we grow.
-            </Typography>
+            <Stack direction={"column"} alignItems={"center"} gap={2}>
+              <Typography
+                sx={{
+                  color: "#000",
+                  fontFamily: fonts.styreneLight,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                }}
+              >
+                Based in Zimbabwe — Orders are currently managed directly by
+                designers, with local delivery options available. Some designers
+                may offer international shipping. A full checkout system is
+                coming soon as we grow.
+              </Typography>
+              <Typography
+                sx={{
+                  color: "#000",
+                  fontFamily: fonts.styreneLight,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                }}
+              >
+                © 2025 Designer’s Haven | All rights reserved
+              </Typography>
+            </Stack>
           </Stack>
         </Grid>
         <Grid size={{ xs: 12, sm: 6 }}>

@@ -2,7 +2,8 @@ export const allDesigners = [
   {
     id: 1,
     name: "MAWOKO",
-    description: "",
+    description:
+      "MAWOKO is a women's wear label that seeks to provide its clientele with an exclusive, tasteful blend of elegant and bold design. Our head designer is Australian accredited (by Whitehouse Institute of Design) and partners with the finest of Harare artisans to ensure a superior finish and experience. Each garment undergoes a meticulous process of refinement and is made with close attention to detail in regards to aesthetics, fabric selection, and craftsmanship. We hope you take your time to peruse every piece as we have taken time to offer to you our hearts in artistic, wearable form",
     location: "Harare, Zimbabwe",
     instagram: "@_mawoko",
     instaLink: "https://www.instagram.com/_mawoko/",
@@ -32,7 +33,7 @@ export const allDesigners = [
     instaLink: "https://www.instagram.com/ashlightdesigners/",
     image:
       "https://designershavenimages.s3.eu-north-1.amazonaws.com/Ashlight+Designer%C3%A2%E2%82%AC%E2%84%A2s+Touch.jpeg",
-    whatsApp: "263779326285",
+    whatsApp: "263772943687",
   },
   {
     id: 4,
@@ -53,7 +54,7 @@ export const allDesigners = [
       "Avant Bespoke is a Zimbabwean luxury brand founded in 2015, rooted in craftsmanship, individuality, and timeless style. We create custom-made garments tailored to reflect each client's character, lifestyle, and aspirations—from classic suits to refined casualwear and leather pieces.",
     location: "Harare, Zimbabwe",
     instagram: "@Avant Bespoke",
-    instaLink: "https://www.instagram.com/chitombavocal/",
+    instaLink: "https://www.instagram.com/avant_bespoke/",
     image:
       "https://designershavenimages.s3.eu-north-1.amazonaws.com/Avant+Bespoke+Luxury+Wear.jpg",
     whatsApp: "263773876290",

@@ -6,10 +6,18 @@ const EarlyAccessModal = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setOpen(true);
+    const dismissed = sessionStorage.getItem("bannerDismissed");
+    if (dismissed === "true") {
+      setOpen(false);
+    }
   }, []);
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    sessionStorage.setItem("bannerDismissed", "true");
+  };
+
+  if (!open) return null;
 
   return (
     <Modal

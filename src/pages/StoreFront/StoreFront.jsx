@@ -84,7 +84,7 @@ const StoreFront = () => {
               fontFamily: fonts.styreneLight,
               lineHeight: "24px",
               letterSpacing: "0.5px",
-              maxWidth: smScreen ? null : "50%",
+              maxWidth: smScreen ? null : "85%",
               textAlign: smScreen ? "center" : "left",
             }}
           >

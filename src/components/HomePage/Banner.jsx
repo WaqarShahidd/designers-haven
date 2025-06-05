@@ -60,14 +60,16 @@ const Banner = () => {
               },
               fontFamily: fonts.styreneLight,
               maxWidth: smScreen ? "75%" : "50%",
-              lineHeight: smScreen ? "28px" : "32px",
+              lineHeight: smScreen ? "24px" : "32px",
               mb: 2,
             }}
           >
-            Connecting Zimbabwean Fashion to the World. Designer’s Haven is a
-            curated fashion tech platform created to support and showcase
-            Zimbabwean fashion designers. Our mission is to connect local talent
-            with a wider audience across Africa and beyond.
+            Empowering Zimbabwean Fashion, Connecting Africa.
+            <br />
+            Designer’s Haven is a curated fashion tech platform that supports
+            emerging designers through digital access, visibility, and
+            resources. Our mission is to build a thriving ecosystem that links
+            local talent with a wider audience across Africa and beyond.
           </Typography>
 
           <Button
