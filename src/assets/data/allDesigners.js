@@ -29,7 +29,7 @@ export const allDesigners = [
     description:
       "An upcoming couture designer based in Harare (Zimbabwe). Garawaziva is a brand that focuses on impowering and building confidence through  design",
     location: "Harare, Zimbabwe",
-    instagram: "@garawaziva_bridget_designs",
+    instagram: "@ashlightdesigners",
     instaLink: "https://www.instagram.com/ashlightdesigners/",
     image:
       "https://designershavenimages.s3.eu-north-1.amazonaws.com/Ashlight+Designer%C3%A2%E2%82%AC%E2%84%A2s+Touch.jpeg",
