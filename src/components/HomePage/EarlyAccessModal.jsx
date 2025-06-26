@@ -3,10 +3,10 @@ import { Box, Modal, Typography, Button, Fade, Backdrop } from "@mui/material";
 import { fonts } from "../../theme/theme";
 
 const EarlyAccessModal = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    const dismissed = sessionStorage.getItem("bannerDismissed");
+    const dismissed = sessionStorage.getItem("modalDismissed");
     if (dismissed === "true") {
       setOpen(false);
     }
@@ -14,7 +14,7 @@ const EarlyAccessModal = () => {
 
   const handleClose = () => {
     setOpen(false);
-    sessionStorage.setItem("bannerDismissed", "true");
+    sessionStorage.setItem("modalDismissed", "true");
   };
 
   if (!open) return null;
