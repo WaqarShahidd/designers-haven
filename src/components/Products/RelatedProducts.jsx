@@ -1,15 +1,19 @@
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { fonts } from "../../theme/theme";
-import { allProducts } from "../../assets/data/allProducts";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../../context/StoreContext";
 
 const RelatedProducts = () => {
   const navigate = useNavigate();
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
-  const limitedProducts = allProducts.slice(0, 5);
+  const { products, loading, error } = useStore();
+
+  const limitedProducts =
+    (products && products?.length > 0 && products?.slice(0, 5)) || [];
+
   return (
     <>
       {isSmallScreen ? (
@@ -23,16 +27,16 @@ const RelatedProducts = () => {
         >
           {limitedProducts.map((item) => (
             <Box
-              key={item.id}
+              key={item?.id}
               sx={{
                 minWidth: "200px",
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(`/product/${item?.id}`)}
             >
               <Box
                 component="img"
-                src={item.image}
-                alt={item.name}
+                src={item?.images[0]}
+                alt={item?.name}
                 sx={{
                   width: "100%",
                   height: "250px",
@@ -49,7 +53,7 @@ const RelatedProducts = () => {
                   color: "#000",
                 }}
               >
-                {item.name}
+                {item?.name}
               </Typography>
               <Typography
                 sx={{
@@ -59,14 +63,14 @@ const RelatedProducts = () => {
                   color: "#000",
                 }}
               >
-                ${item.price}
+                ${item?.price}
               </Typography>
             </Box>
           ))}
         </Box>
       ) : (
         <Grid container spacing={2}>
-          {limitedProducts.map((item) => (
+          {limitedProducts?.map((item) => (
             <Grid item key={item.id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
               <ProductCard item={item} />
             </Grid>

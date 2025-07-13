@@ -1,37 +1,43 @@
 import {
   Box,
+  Checkbox,
   Drawer,
+  FormControlLabel,
   IconButton,
+  Radio,
+  RadioGroup,
+  Slider,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
-import { fonts } from "../../theme/theme";
+import { colors, fonts } from "../../theme/theme";
 import { Close } from "@mui/icons-material";
-import {
-  colorsData,
-  materialData,
-  sizesData,
-} from "../../assets/data/dummyData";
 import CustomBtn from "../Common/CustomBtn";
+import { CATEGORIES, ORDER_TYPES } from "../../constants/options";
 
-const FilterDrawer = ({ open, toggleDrawer }) => {
-  const [selectedColor, setSelectedColor] = useState(colorsData?.[0]);
-
+const FilterDrawer = ({
+  open,
+  toggleDrawer,
+  priceRange,
+  setPriceRange,
+  orderType,
+  setOrderType,
+  selectedCategories,
+  setSelectedCategories,
+}) => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer}>
       <Box
         sx={{
-          width: smScreen ? 250 : 400,
+          width: smScreen ? 250 : 450,
           height: smScreen ? "86vh" : "100vh",
           display: "flex",
           flexDirection: "column",
         }}
         role="presentation"
       >
-        {/* Header */}
         <Box
           sx={{
             display: "flex",
@@ -57,7 +63,6 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
           </IconButton>
         </Box>
 
-        {/* Scrollable Content */}
         <Box
           sx={{
             flex: 1,
@@ -66,127 +71,161 @@ const FilterDrawer = ({ open, toggleDrawer }) => {
             py: 4,
           }}
         >
-          {/* Color Section */}
           <Typography
             sx={{
-              color: "#000",
+              color: colors.textColor,
               fontSize: "16px",
               fontFamily: fonts.styreneLight,
             }}
           >
-            Color
+            Price Range
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              gap: 1.2,
-              mt: 2,
-            }}
-          >
-            {colorsData.map((clr) => (
-              <Box
-                key={clr.color}
+
+          <Box sx={{ width: "95%", px: 1, mt: 1 }}>
+            <Slider
+              value={priceRange}
+              onChange={(e, newValue) => setPriceRange(newValue)}
+              valueLabelDisplay="auto"
+              min={0}
+              max={2000}
+              sx={{
+                color: colors.primary,
+                width: "100%",
+                "& .MuiSlider-thumb": {
+                  width: 18,
+                  height: 18,
+                },
+                "& .MuiSlider-valueLabel": {
+                  fontFamily: fonts.styreneRegular,
+                },
+              }}
+            />
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mt: 1,
+                width: "100%",
+              }}
+            >
+              <Typography
                 sx={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: "50%",
-                  border:
-                    selectedColor === clr.color ? "1px solid #000" : "none",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  fontSize: "12px",
+                  fontFamily: fonts.styreneLight,
+                  color: colors.textColor,
                 }}
               >
-                <Box
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedColor(clr.color);
-                  }}
-                  sx={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: "50%",
-                    bgcolor: clr.color,
-                    cursor: "pointer",
-                  }}
-                />
-              </Box>
-            ))}
+                $0
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "12px",
+                  fontFamily: fonts.styreneLight,
+                  color: colors.textColor,
+                }}
+              >
+                $2000
+              </Typography>
+            </Box>
           </Box>
 
-          {/* Material Section */}
           <Typography
             sx={{
               color: "#000",
               fontSize: "16px",
               fontFamily: fonts.styreneLight,
               mt: 4,
-              mb: 2,
+              mb: 1,
             }}
           >
-            Material
+            Order Type
           </Typography>
-          {materialData.map((material) => (
-            <Typography
-              key={material.material}
-              sx={{
-                color: "#565656",
-                fontSize: "14px",
-                fontFamily: fonts.styreneLight,
-                mb: 0.5,
-                cursor: "pointer",
-                "&:hover": {
-                  textDecoration: "underline",
-                },
-              }}
-            >
-              {material.material}
-            </Typography>
-          ))}
+          <RadioGroup
+            value={orderType}
+            onChange={(e) => setOrderType(e.target.value)}
+          >
+            {ORDER_TYPES.map((type) => (
+              <FormControlLabel
+                key={type.value}
+                value={type.value}
+                control={
+                  <Radio
+                    sx={{
+                      color: colors.primary,
+                      "&.Mui-checked": {
+                        color: colors.primary,
+                      },
+                    }}
+                  />
+                }
+                label={type.label}
+                sx={{
+                  fontSize: "14px",
+                  fontFamily: fonts.styreneRegular,
+                  color: colors.textColor,
+                }}
+              />
+            ))}
+          </RadioGroup>
 
-          {/* Sizes Section */}
           <Typography
             sx={{
               color: "#000",
               fontSize: "16px",
               fontFamily: fonts.styreneLight,
               mt: 4,
-              mb: 2,
+              mb: 1,
             }}
           >
-            Sizes
+            Categories
           </Typography>
-          {sizesData.map((size) => (
-            <Typography
-              key={size.size}
+          {CATEGORIES.map((cat) => (
+            <FormControlLabel
+              key={cat.value}
+              control={
+                <Checkbox
+                  checked={selectedCategories.includes(cat.value)}
+                  onChange={(e) => {
+                    const updated = e.target.checked
+                      ? [...selectedCategories, cat.value]
+                      : selectedCategories.filter((v) => v !== cat.value);
+                    setSelectedCategories(updated);
+                  }}
+                  sx={{
+                    color: colors.primary,
+                    "&.Mui-checked": {
+                      color: colors.primary,
+                    },
+                  }}
+                />
+              }
+              label={cat.label}
               sx={{
-                color: "#565656",
                 fontSize: "14px",
-                fontFamily: fonts.styreneLight,
-                mb: 0.5,
-                cursor: "pointer",
-                "&:hover": {
-                  textDecoration: "underline",
-                },
+                fontFamily: fonts.styreneRegular,
+                color: colors.textColor,
               }}
-            >
-              {size.size}
-            </Typography>
+            />
           ))}
         </Box>
 
-        {/* Footer */}
         <Box
           sx={{
             px: 2,
-            borderTop: "1px solid #DDDDDD",
+            pb: 2,
           }}
         >
           <CustomBtn
-            onClick={toggleDrawer}
-            text={"Apply Filters"}
+            onClick={() => {
+              setPriceRange([0, 2000]);
+              setOrderType("");
+              setSelectedCategories([]);
+              toggleDrawer();
+            }}
+            text={"Reset Filters"}
             width="100%"
+            secondary
           />
         </Box>
       </Box>

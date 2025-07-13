@@ -7,10 +7,11 @@ const DesignersCard = ({ item }) => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <Box
-      onClick={() => navigate(`/store/${item.id}`)}
+      onClick={() => navigate(`/store/${item?.id}`)}
       sx={{
         width: "100%",
         height: "300px",
+        mb: 4,
         borderRadius: 2,
         display: "flex",
         flexDirection: "column",
@@ -26,8 +27,8 @@ const DesignersCard = ({ item }) => {
     >
       <Box
         component="img"
-        src={item.image}
-        alt={item.name}
+        src={item?.avatar}
+        alt={item?.fullName}
         sx={{
           width: "100%",
           height: "250px",
@@ -46,7 +47,7 @@ const DesignersCard = ({ item }) => {
           color: "#000",
         }}
       >
-        {item.name}
+        {item?.fullName}
       </Typography>
       <Typography
         sx={{
@@ -56,7 +57,7 @@ const DesignersCard = ({ item }) => {
           color: "#000",
         }}
       >
-        {item.location}
+        {`${item?.city || "N/A"}, ${item?.country || "N/A"}`}
       </Typography>
     </Box>
   );

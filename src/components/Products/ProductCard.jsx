@@ -2,15 +2,13 @@ import { Box, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { fonts } from "../../theme/theme";
 import { useNavigate } from "react-router-dom";
-import { allDesigners } from "../../assets/data/allDesigners";
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item, store }) => {
   const navigate = useNavigate();
   const [hover, setHover] = useState(false);
 
-  const designer = allDesigners.find(
-    (designer) => designer.id === item.designer
-  );
+  const designer = item?.store ||
+    store || { fullName: "Unknown Designer", avatar: "" };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -28,12 +26,12 @@ const ProductCard = ({ item }) => {
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
           },
         }}
-        onClick={() => navigate(`/product/${item.id}`)}
+        onClick={() => navigate(`/product/${item?.id}`)}
       >
         <Box
           component="img"
-          src={item.image}
-          alt={item.name}
+          src={item?.images[0]}
+          alt={item?.name}
           sx={{
             width: "100%",
             height: "100%",
@@ -61,8 +59,8 @@ const ProductCard = ({ item }) => {
             <Stack direction="row" alignItems="center" gap={1}>
               <Box
                 component={"img"}
-                src={designer.image}
-                alt={designer.name}
+                src={designer?.avatar}
+                alt={designer?.fullName}
                 sx={{
                   width: "50px",
                   height: "50px",
@@ -79,7 +77,7 @@ const ProductCard = ({ item }) => {
                   color: "#000",
                 }}
               >
-                {designer.name}
+                {designer?.fullName}
               </Typography>
             </Stack>
 
@@ -134,7 +132,7 @@ const ProductCard = ({ item }) => {
           color: "#000",
         }}
       >
-        {item.name}
+        {item?.name}
       </Typography>
       <Typography
         sx={{
@@ -144,7 +142,7 @@ const ProductCard = ({ item }) => {
           color: "#000",
         }}
       >
-        ${item.price}
+        ${item?.price}
       </Typography>
     </Box>
   );

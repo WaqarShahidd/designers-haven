@@ -1,5 +1,8 @@
 import {
+  Backdrop,
   Box,
+  Chip,
+  CircularProgress,
   Grid,
   IconButton,
   Menu,
@@ -8,14 +11,15 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Layout from "../../layout/Layout";
 import { fonts } from "../../theme/theme";
 import ProductCard from "../../components/Products/ProductCard";
 import FilterDrawer from "../../components/Products/FilterDrawer";
-import { allProducts } from "../../assets/data/allProducts";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Close } from "@mui/icons-material";
+import { Close, SwapVert, Tune } from "@mui/icons-material";
+import { useStore } from "../../context/StoreContext";
+import { CATEGORIES, SORT_OPTIONS } from "../../constants/options";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -38,32 +42,147 @@ const Products = () => {
 
   const searchQuery = location.state?.searchQuery || "";
 
-  const filteredProducts = allProducts.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const { products, fetchProducts, loading } = useStore();
+
+  const [sortOption, setSortOption] = useState("featured");
+
+  const [priceRange, setPriceRange] = useState([0, 2000]);
+  const [orderType, setOrderType] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const filteredProducts = useMemo(() => {
+    let result = products?.filter((item) =>
+      item?.name?.toLowerCase()?.includes(searchQuery.toLowerCase())
+    );
+
+    if (orderType) {
+      result = result.filter((item) => item.orderType === orderType);
+    }
+
+    if (selectedCategories.length > 0) {
+      result = result.filter((item) =>
+        selectedCategories.some((cat) => item.categories.includes(cat))
+      );
+    }
+
+    result = result.filter(
+      (item) => item.price >= priceRange[0] && item.price <= priceRange[1]
+    );
+
+    switch (sortOption) {
+      case "priceLowToHigh":
+        result = result.sort((a, b) => a.price - b.price);
+        break;
+      case "priceHighToLow":
+        result = result.sort((a, b) => b.price - a.price);
+        break;
+      case "featured":
+      default:
+        result = result.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+    }
+
+    return result;
+  }, [
+    products,
+    searchQuery,
+    orderType,
+    selectedCategories,
+    priceRange,
+    sortOption,
+  ]);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      fetchProducts();
+    }
+  }, []);
 
   return (
     <Layout>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading.products}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
       <Box
         sx={{
           p: 4,
-          display: "flex",
-          flexDirection: "column",
           gap: 2,
-          // justifyContent: "space-between",
-          // alignItems: "center",
           borderBottom: "1px solid #DDDDDD",
         }}
       >
-        <Typography
+        <Box
           sx={{
-            color: "#000",
-            fontSize: "24px",
-            fontFamily: fonts.styreneMedium,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 2,
           }}
         >
-          Shop
-        </Typography>
+          <Typography
+            sx={{
+              color: "#000",
+              fontSize: "24px",
+              fontFamily: fonts.styreneMedium,
+            }}
+          >
+            Shop
+          </Typography>
+          <Stack
+            direction={"row"}
+            spacing={2}
+            alignItems={"center"}
+            width={smScreen ? "50%" : "40%"}
+            justifyContent={"flex-end"}
+          >
+            <Typography
+              sx={{
+                width: smScreen ? "30%" : "15%",
+                fontFamily: fonts.styreneMedium,
+                fontSize: "14px",
+                color: "#000",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+                cursor: "pointer",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
+              onClick={handleClick}
+            >
+              <SwapVert sx={{ color: "#000" }} />
+              Sort
+            </Typography>
+            <Typography
+              sx={{
+                width: smScreen ? "30%" : "15%",
+                fontFamily: fonts.styreneMedium,
+                fontSize: "14px",
+                color: "#000",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+                cursor: "pointer",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
+              onClick={() => setFilter(!filter)}
+            >
+              <Tune sx={{ color: "#000" }} />
+              Filter
+            </Typography>
+          </Stack>
+        </Box>
 
         {searchQuery && (
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
@@ -97,92 +216,73 @@ const Products = () => {
           </Stack>
         )}
 
-        {/* <Stack
-          direction={"row"}
-          spacing={2}
-          alignItems={"center"}
-          width={smScreen ? "50%" : "30%"}
-          justifyContent={"flex-end"}
-        >
-          <Typography
+        {(orderType ||
+          selectedCategories.length ||
+          priceRange[0] !== 0 ||
+          priceRange[1] !== 2000) && (
+          <Box
             sx={{
-              width: smScreen ? "30%" : "15%",
-              fontFamily: fonts.styreneMedium,
-              fontSize: "14px",
-              color: "#000",
+              pt: 2,
+              pb: 0,
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              "&:hover": {
-                textDecoration: "underline",
-              },
+              flexWrap: "wrap",
+              gap: 1,
             }}
-            onClick={handleClick}
           >
-            Sort
-            <ArrowDropDown sx={{ color: "#000" }} />
-          </Typography>
-          <Typography
-            sx={{
-              width: smScreen ? "30%" : "15%",
-              fontFamily: fonts.styreneMedium,
-              fontSize: "14px",
-              color: "#000",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
-            onClick={() => setFilter(!filter)}
-          >
-            Filter
-          </Typography>
-        </Stack> */}
+            {orderType && (
+              <Chip
+                label={`Order Type: ${orderType}`}
+                onDelete={() => setOrderType("")}
+                sx={{
+                  fontFamily: fonts.styreneLight,
+                  backgroundColor: "#f0f0f0",
+                }}
+              />
+            )}
+
+            {selectedCategories.map((cat) => (
+              <Chip
+                key={cat}
+                label={CATEGORIES.find((c) => c.value === cat)?.label || cat}
+                onDelete={() =>
+                  setSelectedCategories((prev) => prev.filter((c) => c !== cat))
+                }
+                sx={{
+                  fontFamily: fonts.styreneLight,
+                  backgroundColor: "#f0f0f0",
+                }}
+              />
+            ))}
+
+            {(priceRange[0] !== 0 || priceRange[1] !== 2000) && (
+              <Chip
+                label={`Price: ${priceRange[0]} - ${priceRange[1]}`}
+                onDelete={() => setPriceRange([0, 2000])}
+                sx={{
+                  fontFamily: fonts.styreneLight,
+                  backgroundColor: "#f0f0f0",
+                }}
+              />
+            )}
+          </Box>
+        )}
+
         <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
-          <MenuItem
-            onClick={() => handleClose()}
-            sx={{
-              fontFamily: fonts.styreneLight,
-              fontSize: "14px",
-              color: "#000",
-            }}
-          >
-            Featured
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleClose()}
-            sx={{
-              fontFamily: fonts.styreneLight,
-              fontSize: "14px",
-              color: "#000",
-            }}
-          >
-            Best Selling
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleClose()}
-            sx={{
-              fontFamily: fonts.styreneLight,
-              fontSize: "14px",
-              color: "#000",
-            }}
-          >
-            Price, low to high
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleClose()}
-            sx={{
-              fontFamily: fonts.styreneLight,
-              fontSize: "14px",
-              color: "#000",
-            }}
-          >
-            Price, hight to low
-          </MenuItem>
+          {SORT_OPTIONS.map((option) => (
+            <MenuItem
+              key={option.value}
+              onClick={() => {
+                setSortOption(option.value);
+                handleClose();
+              }}
+              sx={{
+                fontFamily: fonts.styreneLight,
+                fontSize: "14px",
+              }}
+            >
+              {option.label}
+            </MenuItem>
+          ))}
         </Menu>
       </Box>
 
@@ -196,7 +296,16 @@ const Products = () => {
         </Grid>
       </Box>
 
-      <FilterDrawer open={filter} toggleDrawer={() => setFilter(!filter)} />
+      <FilterDrawer
+        open={filter}
+        toggleDrawer={() => setFilter(!filter)}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        orderType={orderType}
+        setOrderType={setOrderType}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+      />
     </Layout>
   );
 };

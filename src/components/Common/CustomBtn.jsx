@@ -2,7 +2,7 @@ import { Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import { fonts } from "../../theme/theme";
 
-const CustomBtn = ({ text, onClick, width, secondary = false }) => {
+const CustomBtn = ({ text, onClick, width, secondary = false, style = {} }) => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <Button
@@ -11,7 +11,7 @@ const CustomBtn = ({ text, onClick, width, secondary = false }) => {
       sx={{
         backgroundColor: secondary ? "#F8F9FA" : "#000",
         color: secondary ? "#000" : "#fff",
-        border: secondary ? "1px solid #000" : null,
+        border: "1px solid #000",
         boxShadow: "none",
         borderRadius: "0px",
         fontFamily: !smScreen ? fonts.styreneRegular : fonts.styreneLight,
@@ -26,6 +26,7 @@ const CustomBtn = ({ text, onClick, width, secondary = false }) => {
           color: "#000",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
         },
+        ...style,
       }}
     >
       {text}

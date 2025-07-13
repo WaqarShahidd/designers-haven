@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Backdrop,
   Box,
+  CircularProgress,
   Divider,
   Grid,
   Stack,
@@ -9,30 +11,54 @@ import {
 } from "@mui/material";
 import Layout from "../../layout/Layout";
 import { fonts } from "../../theme/theme";
-import { wearNowData } from "../../assets/data/dummyData";
 import ProductCard from "../../components/Products/ProductCard";
 import { useParams } from "react-router-dom";
-import { allDesigners } from "../../assets/data/allDesigners";
-import { allProducts } from "../../assets/data/allProducts";
 import { Instagram, WhatsApp } from "@mui/icons-material";
+import { axiosInstance, useStore } from "../../context/StoreContext";
 
 const StoreFront = () => {
   const smScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const params = useParams();
 
-  const storeId = params.id;
+  const designerId = params.id;
 
-  const store = allDesigners.find(
-    (designer) => designer.id === parseInt(storeId)
-  );
+  const { products } = useStore();
 
-  const storeProducts = allProducts.filter(
-    (item) => item.designer === parseInt(storeId)
-  );
+  const [loading, setLoading] = useState(false);
+  const [designerDetails, setDesignerDetails] = useState({});
+
+  const getDesigner = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(
+        `/user/getDesignerById?designerId=${designerId}`
+      );
+      if (response.status === 200) {
+        const data = response.data;
+        setDesignerDetails(data);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error fetching user data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getDesigner();
+  }, [designerId]);
 
   return (
     <Layout>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Box
         sx={{
           p: 4,
@@ -45,7 +71,7 @@ const StoreFront = () => {
       >
         <Box
           component={"img"}
-          src={store.image}
+          src={designerDetails?.avatar}
           alt="brand-logo"
           sx={{
             width: "100px",
@@ -65,7 +91,7 @@ const StoreFront = () => {
               textAlign: smScreen ? "center" : "left",
             }}
           >
-            {store.name}
+            {designerDetails?.fullName}
           </Typography>
           <Typography
             sx={{
@@ -75,7 +101,9 @@ const StoreFront = () => {
               textAlign: smScreen ? "center" : "left",
             }}
           >
-            {store.location}
+            {`${designerDetails?.city || "N/A"}, ${
+              designerDetails?.country || "N/A"
+            }`}
           </Typography>
           <Typography
             sx={{
@@ -88,7 +116,7 @@ const StoreFront = () => {
               textAlign: smScreen ? "center" : "left",
             }}
           >
-            {store.description}
+            {designerDetails?.bio}
           </Typography>
           <Typography
             sx={{
@@ -111,7 +139,10 @@ const StoreFront = () => {
               alignItems={"center"}
               spacing={1}
               onClick={() =>
-                window.open(`https://wa.me/${store.whatsApp}`, "_blank")
+                window.open(
+                  `https://wa.me/${designerDetails?.whatsApp}`,
+                  "_blank"
+                )
               }
               sx={{ cursor: "pointer" }}
             >
@@ -138,7 +169,14 @@ const StoreFront = () => {
               direction={"row"}
               alignItems={"center"}
               spacing={1}
-              onClick={() => window.open(`${store.instaLink}`, "_blank")}
+              onClick={() =>
+                window.open(
+                  designerDetails?.insta?.includes("instagram.com")
+                    ? designerDetails?.insta
+                    : `https://www.instagram.com/${designerDetails?.insta}`,
+                  "_blank"
+                )
+              }
               sx={{ cursor: "pointer" }}
             >
               <Instagram sx={{ color: "#E1306C", fontSize: "16px" }} />
@@ -152,7 +190,7 @@ const StoreFront = () => {
                   },
                 }}
               >
-                {store.instagram}
+                {designerDetails?.insta}
               </Typography>
             </Stack>
           </Stack>
@@ -171,11 +209,16 @@ const StoreFront = () => {
           Products
         </Typography>
         <Grid container spacing={2}>
-          {storeProducts.map((item) => (
-            <Grid size={{ xs: 12, sm: 4, md: 3, lg: 2.4 }} item key={item.id}>
-              <ProductCard key={item.id} item={item} />
-            </Grid>
-          ))}
+          {designerDetails?.products &&
+            designerDetails?.products?.map((item) => (
+              <Grid size={{ xs: 12, sm: 4, md: 3, lg: 2.4 }} item key={item.id}>
+                <ProductCard
+                  key={item.id}
+                  item={item}
+                  store={designerDetails}
+                />
+              </Grid>
+            ))}
         </Grid>
       </Box>
     </Layout>
