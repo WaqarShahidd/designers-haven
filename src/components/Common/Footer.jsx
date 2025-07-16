@@ -55,6 +55,37 @@ const Footer = () => {
                 may offer international shipping. A full checkout system is
                 coming soon as we grow.
               </Typography>
+              <Button
+                onClick={() =>
+                  window.open(
+                    "https://admin.designershaven.africa/signup",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+                variant="contained"
+                sx={{
+                  backgroundColor: "#000",
+                  color: "#fff",
+                  fontFamily: !smScreen
+                    ? fonts.styreneRegular
+                    : fonts.styreneLight,
+                  fontSize: "15px",
+                  borderRadius: "0px",
+                  px: 3,
+                  py: 1,
+                  textTransform: "none",
+                  width: smScreen ? "100%" : "40%",
+                  minWidth: 0,
+                  boxShadow: "none",
+                  "&:hover": {
+                    backgroundColor: "#333",
+                    boxShadow: "none",
+                  },
+                }}
+              >
+                Join as a Designer
+              </Button>
               <Typography
                 sx={{
                   color: "#000",
