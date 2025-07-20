@@ -7,6 +7,43 @@ export const nav = [
   { id: 3, name: "Meet the Designers", link: "/designers" },
 ];
 
+export const bannerSlides = [
+  {
+    id: 1,
+    image: require("../../assets/images/banner1.png"),
+    title: "Empowering Zimbabwean Fashion. Connecting Africa.",
+    description:
+      "Designer’s Haven is a curated fashion tech platform that supports emerging designers through digital visibility, access, and resources — building a thriving ecosystem across Africa.",
+    buttons: [
+      {
+        text: "Shop Now",
+        route: "/products",
+      },
+      {
+        text: "Become a Designer",
+        linkUrl: "https://admin.designershaven.africa/signup",
+      },
+    ],
+  },
+  {
+    id: 2,
+    image: "https://designershavenimages.s3.eu-north-1.amazonaws.com/p6.jpg",
+    title: "Shop Local. Shop Proudly.",
+    description:
+      " Discover handcrafted, original fashion from Zimbabwe’s boldest designers. Support local talent, celebrate African creativity.",
+    buttons: [
+      {
+        text: "Explore Collections",
+        route: "/products",
+      },
+      {
+        text: "Learn More",
+        linkUrl: "https://admin.designershaven.africa/signup",
+      },
+    ],
+  },
+];
+
 export const bestSellerData = [
   {
     id: 1,
@@ -173,13 +210,6 @@ export const footerData = [
       },
     ],
   },
-];
-
-export const productDetailsData = [
-  { image: require("../images/detail1.jpg") },
-  { image: require("../images/detail2.jpg") },
-  { image: require("../images/detail3.jpg") },
-  { image: require("../images/detail4.jpg") },
 ];
 
 export const colorsData = [

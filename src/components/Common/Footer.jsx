@@ -86,16 +86,6 @@ const Footer = () => {
               >
                 Join as a Designer
               </Button>
-              <Typography
-                sx={{
-                  color: "#000",
-                  fontFamily: fonts.styreneLight,
-                  fontSize: "18px",
-                  lineHeight: "24px",
-                }}
-              >
-                © 2025 Designer’s Haven | All rights reserved
-              </Typography>
             </Stack>
           </Stack>
         </Grid>
@@ -192,10 +182,22 @@ const Footer = () => {
         <Grid size={{ xs: 12 }}>
           <Typography
             sx={{
+              color: "#000",
+              fontFamily: fonts.styreneLight,
+              fontSize: "16px",
+              textAlign: "center",
+              mt: 2,
+            }}
+          >
+            © 2025 Designer’s Haven | All rights reserved
+          </Typography>
+        </Grid>
+        <Grid size={{ xs: 12 }}>
+          <Typography
+            sx={{
               color: "#565656",
               textTransform: "uppercase",
               fontSize: "11px",
-              lineHeight: "17px",
               fontFamily: fonts.styreneRegular,
               textAlign: "center",
             }}
@@ -205,21 +207,6 @@ const Footer = () => {
             tools.
           </Typography>
         </Grid>
-        {/* <Grid size={{ xs: 12 }}>
-          <Typography
-            sx={{
-              color: "#565656",
-              textTransform: "uppercase",
-              fontSize: "11px",
-              lineHeight: "17px",
-              fontFamily: fonts.styreneRegular,
-              textAlign: "center",
-              mb: 1.5,
-            }}
-          >
-            © {new Date().getFullYear()} Designer’s Haven. All rights reserved.
-          </Typography>
-        </Grid> */}
       </Grid>
 
       {/* <Box
