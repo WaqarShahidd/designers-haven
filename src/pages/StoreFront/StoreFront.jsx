@@ -140,7 +140,9 @@ const StoreFront = () => {
               spacing={1}
               onClick={() =>
                 window.open(
-                  `https://wa.me/${designerDetails?.whatsApp}`,
+                  `https://wa.me/${
+                    designerDetails?.dialingCode + designerDetails?.whatsApp
+                  }`,
                   "_blank"
                 )
               }

@@ -61,17 +61,23 @@ const ProductDetail = () => {
       <Box sx={{ p: 4 }}>
         {!loading && (
           <Grid container spacing={2}>
-            {Array.isArray(productDetails?.images) &&
-              productDetails.images.length > 0 && (
-                <Grid
-                  item
-                  size={{ xs: 12, sm: 6 }}
-                  sx={{ order: { xs: 1, sm: 0 } }}
-                >
+            <Grid
+              item
+              size={{ xs: 12, sm: 6 }}
+              sx={{
+                order: { xs: 1, sm: 0 },
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              {productDetails?.images?.length > 0 &&
+                productDetails?.images?.map((image, index) => (
                   <Box
+                    key={index}
                     component="img"
-                    src={productDetails.images[0]}
-                    alt={productDetails?.name}
+                    src={image}
+                    alt={`Product Image ${index + 1}`}
                     sx={{
                       width: "100%",
                       height: "100%",
@@ -79,8 +85,8 @@ const ProductDetail = () => {
                       display: "block",
                     }}
                   />
-                </Grid>
-              )}
+                ))}
+            </Grid>
 
             <Grid
               item
@@ -214,7 +220,10 @@ const ProductDetail = () => {
                   secondary={false}
                   onClick={() =>
                     window.open(
-                      `https://wa.me/${productDetails?.store?.whatsApp}`,
+                      `https://wa.me/${
+                        productDetails?.store?.dialingCode +
+                        productDetails?.store?.whatsApp
+                      }`,
                       "_blank"
                     )
                   }
