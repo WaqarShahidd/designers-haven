@@ -136,9 +136,9 @@ const Products = () => {
           </Typography>
           <Stack
             direction={"row"}
-            spacing={2}
+            spacing={smScreen ? 4 : 2}
             alignItems={"center"}
-            width={smScreen ? "50%" : "40%"}
+            width={smScreen ? "60%" : "40%"}
             justifyContent={"flex-end"}
           >
             <Typography

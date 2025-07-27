@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {pathName === "/" && <InfoBanner />}
+      {/* {pathName === "/" && <InfoBanner />} */}
 
       <Header />
 

@@ -90,63 +90,71 @@ const Footer = () => {
           </Stack>
         </Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
-          {footerData.map((item) => (
-            <Box key={item.id}>
-              <Typography
-                sx={{
-                  color: "#565656",
-                  textTransform: "uppercase",
-                  fontSize: "11px",
-                  lineHeight: "17px",
-                  fontFamily: fonts.styreneRegular,
-                  mb: 1.5,
-                }}
-              >
-                {item.title}
-              </Typography>
-
-              {item.links.map((i) => {
-                const IconComponent = i.Icon;
-                return (
-                  <Box
-                    key={i.name}
+          <Grid container spacing={2}>
+            {footerData.map((item) => (
+              <Grid size={{ xs: 12, sm: 6 }} key={item.id}>
+                <Box>
+                  <Typography
                     sx={{
-                      alignItems: "center",
-                      display: "flex",
-                      gap: 1,
-                      mb: 1,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      if (i.linkUrl) {
-                        window.open(i.linkUrl, "_blank", "noopener,noreferrer");
-                      }
+                      color: "#565656",
+                      textTransform: "uppercase",
+                      fontSize: "11px",
+                      lineHeight: "17px",
+                      fontFamily: fonts.styreneRegular,
+                      mb: 1.5,
                     }}
                   >
-                    <IconComponent sx={i.iconStyle} />
-                    <Typography
-                      component="a"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        color: "#000",
-                        fontSize: "16px",
-                        lineHeight: "20px",
-                        fontFamily: fonts.styreneRegular,
-                        mr: 1,
+                    {item.title}
+                  </Typography>
 
-                        "&:hover": {
-                          textDecoration: "underline",
-                        },
-                      }}
-                    >
-                      {i.name}
-                    </Typography>
-                  </Box>
-                );
-              })}
-            </Box>
-          ))}
+                  {item.links.map((i) => {
+                    const IconComponent = i.Icon;
+                    return (
+                      <Box
+                        key={i.name}
+                        sx={{
+                          alignItems: "center",
+                          display: "flex",
+                          gap: 1,
+                          mb: 1,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          if (i.linkUrl) {
+                            window.open(
+                              i.linkUrl,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }
+                        }}
+                      >
+                        <IconComponent sx={i.iconStyle} />
+                        <Typography
+                          component="a"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{
+                            color: "#000",
+                            fontSize: "16px",
+                            lineHeight: "20px",
+                            fontFamily: fonts.styreneRegular,
+                            mr: 1,
+
+                            "&:hover": {
+                              textDecoration: "underline",
+                            },
+                          }}
+                        >
+                          {i.name}
+                        </Typography>
+                      </Box>
+                    );
+                  })}
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
 
           <Button
             onClick={() =>

@@ -1,5 +1,4 @@
-import { Instagram } from "@mui/icons-material";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { DescriptionOutlined, Instagram, WhatsApp } from "@mui/icons-material";
 
 export const nav = [
   { id: 1, name: "Home", link: "/" },
@@ -193,7 +192,7 @@ export const footerData = [
         name: "WhatsApp",
         linkUrl:
           "https://api.whatsapp.com/send?phone=263785763984&text=I%20am%20interested%20in%20your%20Products",
-        Icon: WhatsAppIcon,
+        Icon: WhatsApp,
         iconStyle: {
           color: "#25D366",
           fontSize: "24px",
@@ -205,6 +204,22 @@ export const footerData = [
         Icon: Instagram,
         iconStyle: {
           color: "#E1306C",
+          fontSize: "24px",
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Legal",
+    links: [
+      {
+        name: "Privacy Policy",
+        linkUrl:
+          "https://drive.google.com/file/d/1A_9w8YmKqNIa8CID28N9bnaGM69yYuYq/view?usp=sharing",
+        Icon: DescriptionOutlined,
+        iconStyle: {
+          color: "#000",
           fontSize: "24px",
         },
       },
